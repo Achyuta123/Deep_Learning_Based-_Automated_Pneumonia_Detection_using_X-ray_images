@@ -1,4 +1,4 @@
-# Major_Project
+
 # Deep Learning Based Automated Pneumonia Detection using X-ray images
 
 A deep learning-based web application for detecting pneumonia from chest X-ray images using Convolutional Neural Networks (CNN).
