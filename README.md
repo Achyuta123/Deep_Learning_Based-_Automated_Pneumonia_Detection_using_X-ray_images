@@ -42,7 +42,7 @@ pneumonia-detection/
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/Achyuta123/Major_Project/Pneumonia_detection.git
+git clone https://github.com/Achyuta123/Major_Project.git
 cd pneumonia-detection
 ```
 
