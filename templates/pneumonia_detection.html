@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pneumonia Detection</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file -->
+    <style>
+        /* Additional styles for the pneumonia detection page */
+        body {
+            background :Linear-gradient(#eefff9 0%, #ffccc1 49%, #dcdbff 100%);
+            color: #333; /* Dark grey */
+            font-family: 'poppins', sans-serif;
+            padding: 20px;
+            width: 100%;
+            min-height: 100vh;
+        }
+
+        h1 {
+            color: #131212; /* Red */
+            margin-bottom: 20px;
+        }
+
+        p {
+            margin-bottom: 10px;
+        }
+
+        .error-message {
+            color: #f44336; /* Red */
+            font-weight: bold;
+        }
+
+        .result {
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .result-pneumonia {
+            color: #f44336; /* Red */
+        }
+
+        .result-normal {
+            color: #4CAF50; /* Green */
+        }
+
+        .uploaded-image {
+            max-width: 100%;
+            margin-top: 20px;
+        }
+
+        /* Style for the loading spinner */
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-left-color: #333;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: auto;
+            margin-top: 20px;
+            display: none; /* Initially hide the spinner */
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Pneumonia Detection</h1>
+    <form id="uploadForm" action="/detect-pneumonia" method="post" enctype="multipart/form-data">
+        <label for="xray_image">Choose an X-ray image:</label>
+        <input type="file" id="xray_image" name="xray_image" accept=".png, .jpg, .jpeg">
+        <button id="uploadButton" type="submit">Upload X-ray Image</button>
+        <div id="loadingSpinner" class="spinner"></div>
+    </form>
+    {% if error %}
+        <p class="error-message">{{ error }}</p>
+    {% endif %}
+    {% if result %}
+        <p class="result {{ result_class }}">{{ result }}</p>
+        <img src="{{ file_path }}" alt="Uploaded X-ray Image" class="uploaded-image">
+    {% endif %}
+
+    <script>
+        // Add event listener to the form submission
+        document.getElementById('uploadForm').addEventListener('submit', function(event) {
+            // Prevent the default form submission
+            event.preventDefault();
+
+            // Display the loading spinner
+            document.getElementById('loadingSpinner').style.display = 'block';
+
+            // Disable the upload button
+            document.getElementById('uploadButton').disabled = true;
+
+            // Submit the form after a short delay (to show the loading spinner)
+            setTimeout(() => {
+                this.submit();
+            }, 500); // Adjust the delay as needed
+        });
+    </script>
+</body>
+</html>
